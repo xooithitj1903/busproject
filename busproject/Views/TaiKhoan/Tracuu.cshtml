@@ -1,0 +1,65 @@
+﻿@model IEnumerable<busproject.Models.LichSu>
+
+@{
+    ViewBag.Title = "Tracuu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tracuu</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.soluongve)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tenkh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaydi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.giave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaydatve)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.soluongve)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenkh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngaydi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.end)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.giave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngaydatve)
+        </td>
+    </tr>
+}
+
+</table>

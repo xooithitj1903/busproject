@@ -1,0 +1,135 @@
+﻿@model IEnumerable<busproject.Models.Chuyenxe>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("Loc", "Chuyenxe"))
+{
+    <table style="border-collapse: separate; border-spacing: 5px;">
+        <tr>
+            <td>Điểm Đi:</td>
+            <td><input type="text" name="start" id="start" /></td>
+            <td></td>
+            <td>Điểm Đến:</td>
+            <td><input type="text" name="end" id="end" /></td>
+            <td></td>
+            <td>Ngày Đi:</td>
+            <td><input type="date" name="Ngaydi" id="Ngaydi" /></td>
+            <td></td>
+            <td>
+                <input type="submit" value="Tìm Kiếm" class="btn btn-success" />
+            </td>
+        </tr>
+    </table>
+}
+
+<script>
+    document.querySelector("form").addEventListener("submit", function (e) {
+        var startInput = document.getElementById("start");
+        var endInput = document.getElementById("end");
+        var ngaydiInput = document.getElementById("Ngaydi");
+
+        if (startInput.value === endInput.value) {
+            alert("Điểm Đi và Điểm Đến không được trùng nhau.");
+            e.preventDefault();
+        }
+
+        var ngaydi = new Date(ngaydiInput.value);
+        var currentDate = new Date();
+
+        if (ngaydi < currentDate) {
+            alert("Ngày Đi phải lớn hơn hoặc bằng ngày hiện tại.");
+            e.preventDefault();
+        }
+    });
+</script>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaydi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sokm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.loaive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.end)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngaydi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sokm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.loaive)
+        </td>
+        <td>
+        </td>
+        <td>
+            @using (Html.BeginForm("DatVe", "Chuyenxe", new { id = item.id }))
+            {
+                <table>
+                    <tr>
+                        <td>Chọn Ngày Bạn Duy Chuyển</td>
+                        <td><input type="date" name="ngaydi" id="ngaykhoihanh" /></td>
+                    </tr>
+                    <tr>
+                        <td>Số lượng vé bạn muốn mua: </td>
+                        <td><input type="number" name="Soluong" required min="1" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Mua" class="btn btn-success" /></td>
+                    </tr>
+                </table>
+            }
+            <script>
+    // Lấy giá trị của ngày từ trường input
+    var ngayDiInput = document.getElementById("ngaykhoihanh");
+
+    // Lấy giá trị của ngày từ thẻ <td>
+    var ngayTrongTd = new Date("@item.ngaydi");
+
+    // Bắt sự kiện thay đổi trên trường input
+    ngayDiInput.addEventListener("change", function() {
+        // Chuyển đổi giá trị ngày từ trường input sang đối tượng Date
+        var ngayDi = new Date(ngayDiInput.value);
+
+        // So sánh ngày trong trường input với ngày trong thẻ <td>
+        if (ngayDi > ngayTrongTd) {
+            alert("Ngày đi phải nhỏ hơn hoặc bằng ngày ngày xe khởi hành");
+            // Có thể thực hiện các hành động khác tùy ý ở đây nếu cần
+        }
+    });
+            </script>
+        </td>
+    </tr>
+}
+
+</table>

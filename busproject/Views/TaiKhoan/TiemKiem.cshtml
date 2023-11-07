@@ -1,0 +1,19 @@
+﻿@model busproject.Models.TaiKhoan
+
+@{
+    ViewBag.Title = "TiemKiem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("Tracuu", "TaiKhoan"))
+{
+    <table style="border-collapse: separate; border-spacing: 5px;">
+        <tr>
+            <td>Nhập Số Điện Thoại Bạn Đã Đặt Vé:</td>
+            <td><input type="text" name="phone" /></td>
+            <td>
+                <input type="submit" value="TraCuu" class="btn btn-success" />
+            </td>
+        </tr>
+    </table>
+}
+
